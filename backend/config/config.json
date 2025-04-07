@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "root",
+    "username": "postgres",
     "password": "admin",
     "database": "Stratford-Lernen-Academy-DB",
     "host": "127.0.0.1",
