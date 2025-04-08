@@ -1,0 +1,216 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  --azul: color(#023e8a);
+}
+
+body,
+html {
+  height: 100%;
+}
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/********** Estilos para el login de profesores y alumnos ***********/
+
+.izquierda {
+  flex: 1;
+  background-image: url("../assets/izquierda.jpg");
+  background-size: cover; /* Hace que la imagen cubra toda la sección */
+  background-position: center; /* Centra la imagen dentro del contenedor */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex-direction: column; /*Con esta línea centré el texto*/
+}
+
+.izquierda::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* Color negro con 50% de opacidad */
+  z-index: 1; /* Coloca la superposición por encima del fondo pero debajo del contenido */
+}
+
+.izquierda * {
+  position: relative; /* Asegura que el contenido esté encima de la superposición */
+  z-index: 2;
+}
+.izquierda h2 {
+  font-size: 2.5em; /* Ajusta el tamaño según lo que prefieras */
+  color: white; /* Ajusta el color del texto si lo necesitas */
+  align-items: center;
+}
+.izquierda .leyenda {
+  display: block; /* Esto hace que el texto dentro del span comience en una nueva línea */
+  font-size: 2.5em; /* Tamaño del texto, puedes ajustarlo */
+  color: white; /* Ajusta el color del texto si es necesario */
+  margin-top: 10px; /* Ajusta el espaciado entre las dos líneas */
+  font-weight: bold; /* Para hacer que el texto se vea más marcado */
+}
+
+.derecha {
+  flex: 1;
+  padding: 20px;
+  background-color: #e57373;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  margin-bottom: 20px; /*"Salto de línea"*/
+  font-size: 1.5em; /* Cambia el tamaño del texto */
+  font-weight: bold; /* Pone el texto en negritas */
+  color: #333; /* Cambia el color del texto */
+  /*font-size: 2em;
+    color: #333;*/
+}
+
+.formulario {
+  width: 450px;
+  height: 550px;
+  /*transform: rotate(180deg);*/
+  padding: 8px 8px 8px 8px;
+
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.42);
+  background: #ffffff;
+  border-color: #ffffff00;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imagen-formulario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* Ajusta el margen inferior según el espacio que quieras debajo de la imagen */
+}
+
+.imagen-formulario img {
+  object-fit: cover;
+  width: 150px;
+  height: auto;
+  margin-top: 10px;
+}
+.sign {
+  text-align: center; /* Centra el texto */
+  margin-top: 20px; /* Ajusta el espacio según necesites */
+}
+
+.login-form {
+  width: 90%; /* Ajusta el formulario para que ocupe el ancho disponible */
+  padding: 10px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-size: 1em;
+  color: black;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.input-group input {
+  padding: 10px;
+  font-size: 1em;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  border-color: #e57373; /* Cambia el color del borde al enfocarse */
+}
+.input-group button {
+  padding: 10px;
+  background-color: #023e8a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+
+  margin-top: 24px;
+}
+
+.input-group button:hover {
+  background-color: #031d3ef5;
+}
+
+/* Contenedor para las etiquetas de Password y Show Password */
+.label-container {
+  display: flex;
+  justify-content: space-between; /* Alinea los elementos a los extremos */
+  align-items: center; /* Alinea verticalmente */
+  margin-bottom: 5px;
+}
+
+/* Estilo para el input de contraseña */
+.input-group input[type="password"] {
+  padding: 10px;
+  font-size: 1em;
+
+  border-radius: 25px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Aumenta la especificidad */
+.input-group .show-password-label {
+  font-size: 0.75em;
+  color: #555; /* Cambia este valor al color que desees */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo para el checkbox */
+.show-password-label input {
+  margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Cambia la dirección de flex a columna */
+  }
+
+  .formulario {
+    width: 90%;
+    height: auto;
+  }
+
+  .izquierda h2,
+  .izquierda .leyenda {
+    font-size: 2em; /* Ajusta el tamaño de la fuente para pantallas pequeñas */
+  }
+
+  .input-group input,
+  .input-group button {
+    width: 100%; /* Haz que los inputs y botones ocupen el 100% del ancho */
+  }
+
+  .imagen-formulario img {
+    max-width: 100%; /* Asegúrate de que la imagen no sobrepase el contenedor */
+    height: auto; /* Mantiene la relación de aspecto */
+  }
+}
