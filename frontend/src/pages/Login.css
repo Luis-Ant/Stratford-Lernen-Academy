@@ -3,13 +3,12 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
-  --azul: color(#023e8a);
 }
 
-body,
-html {
+body, html {
   height: 100%;
 }
+
 .container {
   display: flex;
   height: 100vh;
@@ -18,8 +17,8 @@ html {
 /********** Estilos para el login de profesores y alumnos ***********/
 
 .izquierda {
-  flex: 1;
-  background-image: url("../assets/izquierda.jpg");
+  flex: 1;    
+  background-image: url('../assets/izquierda.jpg'); /* Ajusta la ruta para React */
   background-size: cover; /* Hace que la imagen cubra toda la sección */
   background-position: center; /* Centra la imagen dentro del contenedor */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -27,7 +26,7 @@ html {
   justify-content: center;
   align-items: center;
   position: relative;
-  flex-direction: column; /*Con esta línea centré el texto*/
+  flex-direction: column; /* Centra el texto verticalmente */
 }
 
 .izquierda::before {
@@ -37,7 +36,7 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3); /* Color negro con 50% de opacidad */
+  background-color: rgba(0, 0, 0, 0.3); /* Color negro con 30% de opacidad */
   z-index: 1; /* Coloca la superposición por encima del fondo pero debajo del contenido */
 }
 
@@ -45,11 +44,13 @@ html {
   position: relative; /* Asegura que el contenido esté encima de la superposición */
   z-index: 2;
 }
+
 .izquierda h2 {
   font-size: 2.5em; /* Ajusta el tamaño según lo que prefieras */
   color: white; /* Ajusta el color del texto si lo necesitas */
-  align-items: center;
+  text-align: center;
 }
+
 .izquierda .leyenda {
   display: block; /* Esto hace que el texto dentro del span comience en una nueva línea */
   font-size: 2.5em; /* Tamaño del texto, puedes ajustarlo */
@@ -61,7 +62,7 @@ html {
 .derecha {
   flex: 1;
   padding: 20px;
-  background-color: #e57373;
+  background-color: #E57373;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,26 +70,16 @@ html {
 }
 
 h2 {
-  margin-bottom: 20px; /*"Salto de línea"*/
-  font-size: 1.5em; /* Cambia el tamaño del texto */
-  font-weight: bold; /* Pone el texto en negritas */
-  color: #333; /* Cambia el color del texto */
-  /*font-size: 2em;
-    color: #333;*/
+  margin-bottom: 20px; /* "Salto de línea" */
 }
 
 .formulario {
   width: 450px;
   height: 550px;
-  /*transform: rotate(180deg);*/
-  padding: 8px 8px 8px 8px;
-
+  padding: 8px;
   box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.42);
-  background: #ffffff;
-  border-color: #ffffff00;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 10px 10px 10px 10px;
+  background: #FFFFFF;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,7 +89,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px; /* Ajusta el margen inferior según el espacio que quieras debajo de la imagen */
+  margin-bottom: 20px;
 }
 
 .imagen-formulario img {
@@ -107,13 +98,14 @@ h2 {
   height: auto;
   margin-top: 10px;
 }
+
 .sign {
-  text-align: center; /* Centra el texto */
-  margin-top: 20px; /* Ajusta el espacio según necesites */
+  text-align: center;
+  margin-top: 20px;
 }
 
 .login-form {
-  width: 90%; /* Ajusta el formulario para que ocupe el ancho disponible */
+  width: 90%;
   padding: 10px;
 }
 
@@ -129,6 +121,7 @@ h2 {
   margin-bottom: 5px;
   font-weight: bold;
 }
+
 .input-group input {
   padding: 10px;
   font-size: 1em;
@@ -139,17 +132,17 @@ h2 {
 }
 
 .input-group input:focus {
-  border-color: #e57373; /* Cambia el color del borde al enfocarse */
+  border-color: #E57373; /* Cambia el color del borde al enfocarse */
 }
+
 .input-group button {
   padding: 10px;
-  background-color: #023e8a;
+  background-color: #023E8A;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1em;
-
   margin-top: 24px;
 }
 
@@ -157,41 +150,77 @@ h2 {
   background-color: #031d3ef5;
 }
 
-/* Contenedor para las etiquetas de Password y Show Password */
 .label-container {
   display: flex;
-  justify-content: space-between; /* Alinea los elementos a los extremos */
-  align-items: center; /* Alinea verticalmente */
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 5px;
 }
 
-/* Estilo para el input de contraseña */
 .input-group input[type="password"] {
   padding: 10px;
   font-size: 1em;
-
   border-radius: 25px;
   outline: none;
   box-sizing: border-box;
 }
 
-/* Aumenta la especificidad */
-.input-group .show-password-label {
+.show-password-label {
   font-size: 0.75em;
-  color: #555; /* Cambia este valor al color que desees */
+  color: #555;
   cursor: pointer;
   display: flex;
   align-items: center;
 }
 
-/* Estilo para el checkbox */
 .show-password-label input {
   margin-right: 5px;
 }
 
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  flex: 1;
+  padding-right: 60px; /* Espacio para el texto "Show/Hide" */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 0.9em;
+  padding: 5px;
+}
+
+.toggle-password:hover {
+  color: #0056b3;
+}
+
+.toggle-password-text {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9em;
+  color: #007bff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-password-text:hover {
+  color: #0056b3;
+}
+
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; /* Cambia la dirección de flex a columna */
+    flex-direction: column;
   }
 
   .formulario {
@@ -201,16 +230,21 @@ h2 {
 
   .izquierda h2,
   .izquierda .leyenda {
-    font-size: 2em; /* Ajusta el tamaño de la fuente para pantallas pequeñas */
+    font-size: 2em;
   }
 
   .input-group input,
   .input-group button {
-    width: 100%; /* Haz que los inputs y botones ocupen el 100% del ancho */
+    width: 100%;
   }
 
   .imagen-formulario img {
-    max-width: 100%; /* Asegúrate de que la imagen no sobrepase el contenedor */
-    height: auto; /* Mantiene la relación de aspecto */
+    max-width: 100%;
+    height: auto;
   }
 }
+
+
+
+
+
