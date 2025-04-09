@@ -11,3 +11,14 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });
+
+// const db = require("./config/database");
+
+// db.sequelize
+//   .sync({ alter: true }) // Sincroniza los modelos con la base de datos
+//   .then(() => {
+//     console.log("¡Modelos sincronizados con la base de datos!");
+//   })
+//   .catch((err) => {
+//     console.error("Error al sincronizar los modelos:", err);
+//   });
