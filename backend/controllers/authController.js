@@ -16,10 +16,34 @@ const authController = {
   async login(req, res) {
     try {
       const { usuarioTag, contraseña } = req.body;
-      const { token, user } = await authService.login(usuarioTag, contraseña);
-      res.status(200).json({ token, user });
+      const { accessToken, refreshToken, user } = await authService.login(
+        usuarioTag,
+        contraseña
+      );
+      res.status(200).json({ accessToken, refreshToken, user });
     } catch (error) {
       res.status(401).json({ error: error.message });
+    }
+  },
+
+  // Metodo para refrescar el access token
+  async refreshToken(req, res) {
+    try {
+      const { refreshToken } = req.body;
+      if (!refreshToken) {
+        return res.status(400).json({ error: "Refresh token es requerido" });
+      }
+
+      const decoded = authService.verifyRefreshToken(refreshToken);
+      const accessToken = jwt.sign(
+        { id: decoded.id },
+        process.env.JWT_SECRET,
+        { expiresIn: "15m" } // Generar un nuevo access token
+      );
+
+      res.status(200).json({ accessToken });
+    } catch (error) {
+      res.status(403).json({ error: "Refresh token inválido o expirado" });
     }
   },
 

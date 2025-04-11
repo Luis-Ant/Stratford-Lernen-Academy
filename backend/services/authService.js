@@ -16,19 +16,27 @@ const authService = {
     const isPasswordValid = await bcrypt.compare(contraseña, user.contraseña);
     if (!isPasswordValid) throw new Error("Contraseña incorrecta");
 
-    const token = jwt.sign(
+    const accessToken = jwt.sign(
       { id: user.idUsuario, tipoUsuario: user.tipoUsuario },
       process.env.JWT_SECRET,
-      {
-        expiresIn: "1h",
-      }
+      { expiresIn: "15m" } // Access token válido por 15 minutos
     );
 
-    return { token, user };
+    const refreshToken = jwt.sign(
+      { id: user.idUsuario },
+      process.env.REFRESH_TOKEN_SECRET,
+      { expiresIn: "7d" } // Refresh token válido por 7 días
+    );
+
+    return { accessToken, refreshToken, user };
   },
 
   verifyToken(token) {
     return jwt.verify(token, process.env.JWT_SECRET);
+  },
+
+  verifyRefreshToken(refreshToken) {
+    return jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
   },
 };
 

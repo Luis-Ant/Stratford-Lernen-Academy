@@ -1,16 +1,15 @@
 // Manejar las peticiones HTTP.
-import axios from "axios";
+import axiosInstance from "../utils/axiosConfig";
 
-const API_URL = "http://localhost:3001/auth"; // Ajusta la URL según tu backend
-
-export const login = async (usuarioTag, contraseña) => {
+export const login = async (username, password) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, {
-      usuarioTag,
-      contraseña,
+    const response = await axiosInstance.post("/login", {
+      usuarioTag: username,
+      contraseña: password,
     });
-    return response.data; // Retorna el token y cualquier dato adicional
+    return response.data; // Devuelve los datos del backend
   } catch (error) {
-    throw error.response?.data?.message || "Error al iniciar sesión";
+    console.error("Error en el servicio de login:", error);
+    throw error;
   }
 };
