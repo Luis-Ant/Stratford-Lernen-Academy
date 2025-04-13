@@ -1,20 +1,21 @@
 // Logica de negocio para la autenticacion, registro, inicio de sesion y verificacion de tokens.
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { Usuario } = require("../config/database");
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import db from "../config/database.js";
+const { Usuario } = db;
 
 const authService = {
   async register(data) {
-    const hashedPassword = await bcrypt.hash(data.contraseña, 10);
-    return Usuario.create({ ...data, contraseña: hashedPassword });
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+    return Usuario.create({ ...data, password: hashedPassword });
   },
 
-  async login(usuarioTag, contraseña) {
-    const user = await Usuario.findOne({ where: { usuarioTag } });
-    if (!user) throw new Error("Usuario no encontrado");
+  async login(email, password) {
+    const user = await Usuario.findOne({ where: { email } });
+    if (!user) throw new Error("Credenciales incorrectas");
 
-    const isPasswordValid = await bcrypt.compare(contraseña, user.contraseña);
-    if (!isPasswordValid) throw new Error("Contraseña incorrecta");
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) throw new Error("Credenciales incorrectas");
 
     const accessToken = jwt.sign(
       { id: user.idUsuario, tipoUsuario: user.tipoUsuario },
@@ -31,8 +32,8 @@ const authService = {
     return { accessToken, refreshToken, user };
   },
 
-  verifyToken(token) {
-    return jwt.verify(token, process.env.JWT_SECRET);
+  verifyToken(accessToken) {
+    return jwt.verify(accessToken, process.env.JWT_SECRET);
   },
 
   verifyRefreshToken(refreshToken) {
@@ -40,4 +41,4 @@ const authService = {
   },
 };
 
-module.exports = authService;
+export default authService;

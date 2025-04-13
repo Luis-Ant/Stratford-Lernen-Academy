@@ -1,10 +1,10 @@
-// Middlewares para proteger rutas
-const jwt = require("jsona validaciones, autenticación y autorizaciónwebtoken");
+// Este middleware se puede usar en las rutas que requieren autenticación.
+import jwt from "jsonwebtoken";
 
 const authMiddleware = (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const accessToken = req.headers.authorization.split(" ")[1];
+    const decoded = jwt.verify(accessToken, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
@@ -12,4 +12,4 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+export default authMiddleware;

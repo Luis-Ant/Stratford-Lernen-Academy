@@ -1,5 +1,6 @@
-// Metodos de login, registro, logout y verificacion de token
-const authService = require("../services/authService");
+// Este controlador se encarga de manejar las solicitudes relacionadas con la autenticación de usuarios.
+import authService from "../services/authService.js";
+import jwt from "jsonwebtoken";
 
 const authController = {
   // Método para registrar un nuevo usuario
@@ -15,18 +16,20 @@ const authController = {
   // Método para iniciar sesión
   async login(req, res) {
     try {
-      const { usuarioTag, contraseña } = req.body;
+      const { email, password } = req.body;
       const { accessToken, refreshToken, user } = await authService.login(
-        usuarioTag,
-        contraseña
+        email,
+        password
       );
-      res.status(200).json({ accessToken, refreshToken, user });
+      res
+        .status(200)
+        .json({ message: "Login exitoso", accessToken, refreshToken, user });
     } catch (error) {
       res.status(401).json({ error: error.message });
     }
   },
 
-  // Metodo para refrescar el access token
+  // Metodo para refrescar el accessToken
   async refreshToken(req, res) {
     try {
       const { refreshToken } = req.body;
@@ -48,7 +51,7 @@ const authController = {
   },
 
   // Método para verificar el token
-  verify(req, res) {
+  async verify(req, res) {
     try {
       const token = req.headers.authorization.split(" ")[1];
       const decoded = authService.verifyToken(token);
@@ -59,4 +62,4 @@ const authController = {
   },
 };
 
-module.exports = authController;
+export default authController;

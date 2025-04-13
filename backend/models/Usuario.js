@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Usuario = sequelize.define("Usuario", {
     idUsuario: {
       type: DataTypes.INTEGER,
@@ -30,17 +30,23 @@ module.exports = (sequelize, DataTypes) => {
     apllMatUsuario: {
       type: DataTypes.STRING(50),
     },
-    usuarioTag: {
-      type: DataTypes.STRING(50),
-      unique: true,
+    email: {
+      type: DataTypes.STRING(100),
       allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
-    contraseña: {
+    password: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
     imgUrlUsuario: {
       type: DataTypes.STRING(255),
+      validate: {
+        isUrl: true,
+      },
     },
   });
 
