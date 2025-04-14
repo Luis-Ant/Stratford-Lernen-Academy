@@ -1,13 +1,13 @@
 // Manejar las peticiones HTTP.
 import axiosInstance from "../utils/axiosConfig";
 
-export const login = async (username, password) => {
+export const login = async (email, password) => {
   try {
     const response = await axiosInstance.post("/login", {
-      usuarioTag: username,
-      contraseña: password,
+      email,
+      password,
     });
-    return response.data; // Devuelve los datos del backend
+    return response.data;
   } catch (error) {
     console.error("Error en el servicio de login:", error);
     throw error;

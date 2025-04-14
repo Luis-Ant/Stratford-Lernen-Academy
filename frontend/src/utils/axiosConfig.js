@@ -6,10 +6,11 @@ const axiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  const token = Cookies.get("accessToken");
+  const token = Cookies.get("accessToken", "refreshToken");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
