@@ -21,9 +21,22 @@ const authController = {
         email,
         password
       );
-      res
-        .status(200)
-        .json({ message: "Login exitoso", accessToken, refreshToken, user });
+
+      res.cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // Solo en HTTPS en producción
+        sameSite: "strict",
+        maxAge: 15 * 60 * 1000, // 15 minutos
+      });
+
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 días
+      });
+
+      res.status(200).json({ user });
     } catch (error) {
       res.status(401).json({ error: error.message });
     }
@@ -43,6 +56,13 @@ const authController = {
         process.env.JWT_SECRET,
         { expiresIn: "15m" } // Generar un nuevo access token
       );
+
+      res.cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 15 * 60 * 1000, // 15 minutos
+      });
 
       res.status(200).json({ accessToken });
     } catch (error) {
